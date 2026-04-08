@@ -29,21 +29,28 @@ defmodule Mimic.Cover do
   @doc false
   # Resets the module and ensures we haven't lost its coverdata
   def clear_module_and_import_coverdata!(module, original_beam_path, original_coverdata_path) do
-    path = module |> Mimic.Module.original() |> export_coverdata!()
-    rewrite_coverdata!(path, module)
+    try do
+      path = module |> Mimic.Module.original() |> export_coverdata!()
+      rewrite_coverdata!(path, module)
 
-    Mimic.Module.clear!(module)
-    # Put back cover-compiled status for original module (don't need the private
-    # compile_beams function here because the file should exist for the original module)
-    :cover.compile_beam(original_beam_path)
+      Mimic.Module.clear!(module)
+      # Put back cover-compiled status for original module (don't need the private
+      # compile_beams function here because the file should exist for the original module)
+      :cover.compile_beam(original_beam_path)
 
-    # Original module's coverdata would be lost due to purging it otherwise
-    :ok = :cover.import(String.to_charlist(path))
-    # Load coverdata from module from before the test
-    :ok = :cover.import(String.to_charlist(original_coverdata_path))
+      # Original module's coverdata would be lost due to purging it otherwise
+      :ok = :cover.import(String.to_charlist(path))
+      # Load coverdata from module from before the test
+      :ok = :cover.import(String.to_charlist(original_coverdata_path))
 
-    File.rm(path)
-    File.rm(original_coverdata_path)
+      File.rm(path)
+      File.rm(original_coverdata_path)
+    rescue
+      MatchError ->
+        Mimic.Module.clear!(module)
+        :cover.compile_beam(original_beam_path)
+        File.rm(original_coverdata_path)
+    end
   end
 
   @doc false
