@@ -1,5 +1,5 @@
 version: 1
-generated_at: 2026-06-11T15:39:19Z
+generated_at: 2026-06-15T13:15:49Z
 internal: []
 trusted:
   - action: actions/checkout
