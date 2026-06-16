@@ -1,12 +1,12 @@
 version: 1
-generated_at: 2026-06-15T13:15:49Z
+generated_at: 2026-06-15T17:50:35Z
 internal: []
 trusted:
   - action: actions/checkout
     refs:
-      - v2.3.1
+      - 28c7f3d2b5162b5ddd3dfd9a45aa55eaf396478b
     occurrences:
-      v2.3.1:
+      28c7f3d2b5162b5ddd3dfd9a45aa55eaf396478b:
         .github/workflows/main.yml:
           - jobs.format.steps.[0].uses
           - jobs.test.steps.[0].uses

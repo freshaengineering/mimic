@@ -7,7 +7,7 @@ jobs:
     name: Format & credo
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.1
+      - uses: actions/checkout@28c7f3d2b5162b5ddd3dfd9a45aa55eaf396478b # v2.3.1
 
       - name: Install OTP and Elixir
         uses: erlef/setup-beam@fc68ffb90438ef2936bbb3251622353b3dcb2f93 # v1
@@ -46,7 +46,7 @@ jobs:
     env:
       MIX_ENV: test
     steps:
-      - uses: actions/checkout@v2.3.1
+      - uses: actions/checkout@28c7f3d2b5162b5ddd3dfd9a45aa55eaf396478b # v2.3.1
 
       - name: Install OTP and Elixir
         uses: erlef/setup-beam@fc68ffb90438ef2936bbb3251622353b3dcb2f93 # v1
