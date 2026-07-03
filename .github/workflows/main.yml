@@ -7,6 +7,12 @@ jobs:
     name: Format & credo
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2
+        with:
+          use-policy-store: true
+          api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
+
       - uses: actions/checkout@28c7f3d2b5162b5ddd3dfd9a45aa55eaf396478b # v2.3.1
 
       - name: Install OTP and Elixir
@@ -46,6 +52,12 @@ jobs:
     env:
       MIX_ENV: test
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2
+        with:
+          use-policy-store: true
+          api-key: ${{ secrets.GH_FRESHAENGINEERING_STEP_SECURITY_API_KEY }}
+
       - uses: actions/checkout@28c7f3d2b5162b5ddd3dfd9a45aa55eaf396478b # v2.3.1
 
       - name: Install OTP and Elixir
